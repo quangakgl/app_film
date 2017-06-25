@@ -2,43 +2,43 @@
 <html lang="en">
 <head>
   
-  <% include partials/head.html %>
+  {% include "partials/head.html" %}
 
 </head>
 <body>
 
-	<% include partials/header.html %>
+	{% include "partials/header.html" %}
 
 	<div id="hero-image">
-		<h1 id="hero-title"><%= title %></h1>
+		<h1 id="hero-title">{{ title }}</h1>
 	</div>
 
 
 	<div id="posters-wrapper" class="content-padding clearfix">
 
-	  <% for (var i = 0; i < movies.length; i++) { %>
+
+		{% for i in movies %}
 	  	<div class="poster">
 
-	  		<a href="/star_wars_episode/<%= movies[i].episode_number %>">
+	  		<a href="/star_wars_episode/{{ i.episode_number }}">
 
-			  	<img src="/images/<%= movies[i].poster %>" class="img-responsive">
+			  	<img src="/images/{{i.poster}}" class="img-responsive">
 
 			  	<div class="poster-info-overlay">
-			  		<h3><%= movies[i].title %></h3>
+			  		<h3>{{ i.title }}</h3>
 			  		<h4>View More <i class="fa fa-arrow-right"></i></h4>
 			  	</div>
 
 		  	</a>
 
 			</div>	  
-	  <% } %>
+	  {% endfor %}
 
 	</div>
 
+	{% include "partials/footer.html" %}
 
-	<% include partials/footer.html %>
-
-  <% include partials/scripts.html %>
+  {% include "partials/scripts.html" %}
 
 </body>
 </html>

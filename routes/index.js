@@ -1,5 +1,5 @@
 const { db, } = require('../pgp');
-
+const moviesJSON = require('../movies.json');
 exports.home = (req,res) =>{
     db.any('SELECT * FROM movies')
         .then( data =>{
@@ -13,44 +13,47 @@ exports.home = (req,res) =>{
 
 
 }
-exports.movie_single = (req, res) =>{
+exports.movie_single = (req, res) => {
     let episode_number = req.params.episode_number;
-    db.any('SELECT * FROM movies WHERE id = ' + episode_number)
-        .then( data =>{
-            res.render('movie_single',{
-                movies:data
-            })
+    if (episode_number <= 6 && episode_number >= 1) {
+        db.any('SELECT * FROM movies WHERE episode_number = ' + episode_number)
+            .then(data => {
+                res.render('movie_single', {
+                    movies: data
+                })
 
-        })
+            })
+    }else {
+        let movies = moviesJSON.movies;
+
+        res.render('notFound', {
+            title: "Star Wars Movies",
+            movies : movies
+        });
+    }
 }
 
-var moviesJSON = require('../movies.json');
 
-// Home Route
-exports.home = function(req, res) {
 
-	var movies = moviesJSON.movies;
 
-	res.render('home', {
-		title: "Star Wars Movies",
-		movies : movies
-	});
-};
+
+
+
 
 // // Movie-single route
 // exports.movie_single = function(req, res) {
-// 	var episode_number = req.params.episode_number;
+// 	let episode_number = req.params.episode_number;
 //
-// 	var movies = moviesJSON.movies;
+// 	let movies = moviesJSON.movies;
 //
 // 	// Only render the movie_single template for episodes that exist
 // 	if (episode_number >= 1 && episode_number <= 6) {
 //
-// 		var movie = movies[episode_number - 1];
+// 		let movie = movies[episode_number - 1];
 //
-// 		var title = movie.title;
+// 		let title = movie.title;
 //
-// 		var main_characters = movie.main_characters;
+// 		let main_characters = movie.main_characters;
 //
 // 		res.render('movie_single', {
 // 			movies : movies,
@@ -70,7 +73,7 @@ exports.home = function(req, res) {
 //
 // // Route for all other page requests
 // exports.notFound = function(req, res) {
-// 	var movies = moviesJSON.movies;
+// 	let movies = moviesJSON.movies;
 // 	res.render('notFound', {
 // 		movies : movies,
 // 		title : "Oops, this page doesn't exist"

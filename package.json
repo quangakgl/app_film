@@ -9,8 +9,13 @@
   "author": "Ryan Hemrick",
   "license": "ISC",
   "dependencies": {
-    "ejs": "^2.3.4",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
     "express": "^4.13.3",
-    "pg-promise": "^5.9.5"
+    "html": "^1.0.0",
+    "nunjucks": "^3.0.1",
+    "path": "^0.12.7",
+    "pg-monitor": "^0.8.2",
+    "pg-promise": "^5.9.6"
   }
 }

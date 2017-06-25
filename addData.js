@@ -1,8 +1,8 @@
 /**
  * Created by quang on 22/06/2017.
  */
-var pgp = require('pg-promise')();
-var db = pgp('postgres://postgres:123@localhost:5432/movies');
+const pgp = require('pg-promise')();
+const  db = pgp('postgres://postgres:123@localhost:5432/movies');
 let data = require('./movies.json');
 
 for(let count in data){

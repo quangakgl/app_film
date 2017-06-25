@@ -2,49 +2,49 @@
 <html lang="en">
 <head>
   
-  <% include partials/head.html %>
+  {% include "partials/head.html" %}
 
 </head>
 <body>
 
-	<% include partials/header.html %>
+	{% include "partials/header.html" %}
 
+	{% for i in movies %}
 	<div id="hero-image-single" style="background-image: url('/images/<%= movie.hero_image %>');">
-		<h1 id="hero-title"><%= title %></h1>
+		<h1 id="hero-title">{{i.title}}</h1>
 	</div>
 
 
 	<div class="content-padding clearfix">
 
 		<div class="poster-wrapper">
-  		<img src="/images/<%= movie.poster %>" class="img-responsive">
+  		<img src="/images/{{ i.poster }}" class="img-responsive">
   	</div>
 
   	<div class="description-wrapper">
   		
   		<div class="description">
   			<h2 class="movie-header">Description</h2>
-  			<p><%= movie.description %></p>
+  			<p>{{ i.description }}</p>
   		</div>
 
   		<div class="main-characters">
   			<h2 class="movie-header">Main Characters</h2>
   			<ul>
-  			<% for (var i = 0; i < main_characters.length; i++) { %>
-  				<li><%= main_characters[i] %></li>
-  			<% } %>
+  			{% for j in i.main_characters %}
+  				<li>{{ j }}</li>
+  			{% endfor %}
   			</ul>
   		</div>
 
   	</div>
 
 	</div>
+	{% endfor %}
 
 
-
-  <% include partials/footer.html %>
-
-  <% include partials/scripts.html %>
+  {% include "partials/footer.html" %}
+  {% include "partials/scripts.html" %}
 
 </body>
 </html>

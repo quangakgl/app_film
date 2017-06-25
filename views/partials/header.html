@@ -11,11 +11,11 @@
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Movies <i class="fa fa-chevron-down"></i></a>
 				<ul class="dropdown-menu">
           
-					<% for (var i = 1; i <= movies.length; i++) { %>
+					{% for i in movies %}
 					<li>
-						<a href="/star_wars_episode/<%= i %>" class="episode_link"><%= movies[i - 1].title %></a>
+						<a href="/star_wars_episode/{{i.episode_number}}" class="episode_link">{{ i.title }}</a>
 					</li>
-					<% } %>	
+					{% endfor %}
 
 
         </ul> <!-- dropdown-menu -->
